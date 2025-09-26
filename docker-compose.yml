@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - PORT=9000
+      - MONGODB_URI=mongodb+srv://jsj22037:jsj22037@mongo-cluster.mefl6kr.mongodb.net/sample_task
+      - JWT_SECRET=customsecret
+      - JWT_EXPIRES_IN=1d
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:4173"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - VITE_API_BASE_URL=http://localhost:9000
